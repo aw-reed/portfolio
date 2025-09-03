@@ -2,14 +2,10 @@ import React, { useEffect, useMemo, useRef, useState, useCallback, memo } from "
 import { 
   FolderClosed, Briefcase, User, Wrench, GraduationCap, Star, 
   FileText, Phone, Mail, Code2, Award, BookOpen, Cpu, Server, Github,
-  Linkedin, Globe, Image as ImageIcon, ExternalLink, ChevronRight, X, Minus
+  Linkedin, Globe, Image as ImageIcon, ExternalLink, ChevronRight, X, Minus,
+  ChevronLeft, ChevronDown, ChevronUp
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-/**
- * Windows XP–style Portfolio Desktop
- * Tech: React + Tailwind + Framer Motion + lucide-react
- */
 
 // ------------------------------ XP THEME TOKENS ------------------------------
 const XP = {
@@ -32,7 +28,7 @@ const ANDREW = {
   title: "Class of 2025",
   location: "Los Angeles, CA",
   email: "reedandrew10@icloud.com",
-  phone: "(213) 281-2419",
+  phone: "Phone Number Available in Application",
   github: "https://github.com/aw-reed",
   linkedin: "https://www.linkedin.com/in/andrew-walter-reed/",
   summary: `Computer Science & Engineering graduate from the University of California, Merced with hands-on experience across full‑stack web development, software engineering, data analysis, data collection and marketing. I enjoy shipping polished, user‑friendly tools and telling the story with clean UI, clear metrics, and documented code. I also have a passion for marketing making high quality posts, custom graphics, filiming content, conducting photoshoots and editing photos to look polished.`,
@@ -68,7 +64,7 @@ const EXPERIENCE = [
   {
     company: "U.S. Department of State",
     role: "Software Engineer Intern",
-    period: "August 2024 – December 2025",
+    period: "August 2024 – December 2024",
     photo: "https://i.imgur.com/nrKcN8A.jpeg",
     bullets: [
       "Created a private custom application titled the Programming Assessment Scheduling Calendar within a team of 5 to automate the process for Training Specialists to automatically schedule progress assessments for newly recruited U.S. Diplomats. They must take a 24-week course and pass a series of assessments before being deployed in a foreign country. Previously to our application, Training Specialists would use Microsoft Excel sheets to keep track and manually send out appointment emails.",
@@ -234,6 +230,127 @@ const CONTACT = {
   linkedin: ANDREW.linkedin,
 };
 
+// ------------------------------ PORTFOLIO DATA ------------------------------
+const PHOTO_PORTFOLIO = [
+  {
+    id: 1,
+    src: "https://i.imgur.com/YKhAIwp.png",
+    alt: "Portrait Photography",
+    title: "Portrait Photography",
+    description: "Professional Senior Headshots for a member of Delta Gamma"
+  },
+  {
+    id: 2,
+    src: "https://i.imgur.com/cQWW4Pg.png",
+    alt: "Portrait Photography",
+    title: "Portrait Photography",
+    description: "Professional Studio Headshot for a member of Alpha Kappa Psi"
+  },
+  {
+    id: 3,
+    src: "https://i.imgur.com/ysPaDw3.png",
+    alt: "Solo Photography",
+    title: "Solo Photography",
+    description: "Solo Photoshoot for a member of UC Merced's Soccer Team"
+  },
+  {
+    id: 4,
+    src: "https://i.imgur.com/aS72INc.png",
+    alt: "Group Photography",
+    title: "Group Photography",
+    description: "Group Photoshoot for members of Theta Tau"
+  },
+  {
+    id: 5,
+    src: "https://i.imgur.com/m5Pyou2.png",
+    alt: "Event Photography",
+    title: "Event Photography",
+    description: "Treats N' Beats 2023 Crowd"
+  },
+  {
+    id: 6,
+    src: "https://i.imgur.com/1W1z0lt.png",
+    alt: "Lifestyle Photography",
+    title: "Lifestyle Photography",
+    description: "Some Pi Kapps dancing at AKPSI's Paws & Claws 2025"
+  }
+];
+
+const MARKETING_PORTFOLIO = [
+  {
+    id: 1,
+    src: "https://i.imgur.com/CS375xS.png",
+    alt: "Instagram Marketing Post",
+    title: "AKPSI Post",
+    description: "Recruitment S25 Announcement",
+    platform: "Instagram",
+    link: "https://www.instagram.com/p/DFn9maATUW9/?igsh=NjZiM2M3MzIxNA%3D%3D"
+  },
+  {
+    id: 2,
+    src: "https://i.imgur.com/wEXDjlh.png",
+    alt: "Instagram Marketing Post",
+    title: "AKPSI Post",
+    description: "Introduced the Alpha Iota Class to Greek Life at UC Merced",
+    platform: "Instagram",
+    link: "https://www.instagram.com/p/DJSbfgjzg73/?igsh=NjZiM2M3MzIxNA%3D%3D"
+  },
+  {
+    id: 3,
+    src: "https://i.imgur.com/3Q8AH7U.jpeg",
+    alt: "Instagram Marketing Post",
+    title: "Appathon Flyer",
+    description: "Flyer for UC Merced's Biggest Professional Development Event",
+    platform: "Instagram",
+    link: "https://www.instagram.com/p/DHWuAZtSxrw/?igsh=NjZiM2M3MzIxNA%3D%3D"
+  },
+  {
+    id: 4,
+    src: "https://i.imgur.com/C2XM2Yu.png",
+    alt: "Instagram Marketing Post",
+    title: "Appathon Testimonial",
+    description: "A testimonal of Appathon's Usefulness to promote the Event",
+    platform: "Instagram",
+    link: "https://www.instagram.com/p/DH1fZ-ATlH9/?igsh=NjZiM2M3MzIxNA%3D%3D"
+  },
+  {
+    id: 5,
+    src: "https://i.imgur.com/nKDGMeq.png",
+    alt: "Instagram Marketing Post",
+    title: "Graduation Post",
+    description: "Graduation Post dedicated to the Office of Student Involvement's graduating interns",
+    platform: "Instagram",
+    link: "https://www.instagram.com/p/DJw1ZvVtika/?igsh=NjZiM2M3MzIxNA%3D%3D"
+  },
+  {
+    id: 6,
+    src: "https://i.imgur.com/FrgpVBb.png",
+    alt: "Instagram Marketing Post",
+    title: "Newsletter Announcement",
+    description: "Monthly Announcement Post I would make for OSI's Bobcat 411",
+    platform: "Instagram",
+    link: "https://www.instagram.com/p/DJubQIrMIlv/?igsh=NjZiM2M3MzIxNA%3D%3D"
+  },
+  {
+    id: 7,
+    src: "https://i.imgur.com/t674mLD.png",
+    alt: "Digital Magazine",
+    title: "Bobcat 411",
+    description: "Bobcat 411 Issues in which I was the Editor-in-Chief for",
+    platform: "Website",
+    link: "https://studentinvolvement.ucmerced.edu/media-archives/monthly-newsletter"
+  },
+  {
+    id: 8,
+    src: "https://i.imgur.com/INWTgpJ.png",
+    alt: "Digital Magazine",
+    title: "UC Merced Impact Report",
+    description: "The Official UC Merced Impact Report for UC Merced's administrators",
+    platform: "Website",
+    link: ""
+  }
+];
+
 // ------------------------------ HELPERS ------------------------------
 function classNames(...arr) {
   return arr.filter(Boolean).join(" ");
@@ -284,23 +401,23 @@ const ICONS = {
   Blog: BookOpen,
   TechStack: Cpu,
   Deployments: Server,
+  Portfolios: ImageIcon,
 };
 
-// Which folders appear as icons on the desktop
 const DESKTOP_FOLDERS = [
   { id: "bio", title: "Biography", icon: "Biography" },
   { id: "experience", title: "Work Experience", icon: "Experience" },
   { id: "extracurriculars", title: "Extracurriculars", icon: "Extracurriculars" },
   { id: "projects", title: "Projects", icon: "Projects" },
+  { id: "portfolios", title: "Portfolios", icon: "Portfolios" },
   { id: "skills", title: "Skills", icon: "Skills" },
   { id: "coursework", title: "Coursework", icon: "Coursework" },
-  { id: "certs", title: "Certifications & Awards", icon: "Certifications" },
-  { id: "resume", title: "Resume", icon: "Resume" },
+  { id: "certs", title: "Certifications", icon: "Certifications" },
   { id: "contact", title: "Contact", icon: "Contact" },
 ];
 
 // ---------------------- ZOOMABLE IMAGE COMPONENT ----------------------
-function ZoomableImage({ src, alt }) {
+function ZoomableImage({ src, alt, link, imgClassName, onOpenChange }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -308,8 +425,14 @@ function ZoomableImage({ src, alt }) {
       <img
         src={src}
         alt={alt}
-        className="cursor-pointer rounded shadow hover:scale-105 transition-transform w-full max-w-xs sm:max-w-sm"
-        onClick={() => setOpen(true)}
+        className={classNames(
+          "cursor-pointer rounded shadow hover:scale-105 transition-transform",
+          imgClassName || "w-full max-w-xs sm:max-w-sm"
+        )}
+        onClick={() => {
+          setOpen(true);
+          onOpenChange?.(true);
+        }}
         loading="lazy"
       />
 
@@ -322,15 +445,29 @@ function ZoomableImage({ src, alt }) {
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 p-4"
             onClick={() => setOpen(false)}
           >
-            <motion.img
-              src={src}
-              alt={alt}
-              className="max-h-[85vh] max-w-[95vw] rounded shadow-lg"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <motion.div onClick={(e) => e.stopPropagation()} className="relative">
+              <img
+                src={src}
+                alt={alt}
+                className="max-h-[85vh] max-w-[95vw] rounded shadow-lg"
+              />
+              {link && (
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-black rounded px-3 py-1 text-xs sm:text-sm absolute left-1/2 -translate-x-1/2 -bottom-10 shadow"
+                >
+                  View <ExternalLink size={14} />
+                </a>
+              )}
+            </motion.div>
             <button
               className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white bg-black/50 rounded-full p-1 hover:bg-black/70 touch-manipulation"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                onOpenChange?.(false);
+              }}
             >
               <X size={18} className="sm:w-5 sm:h-5" />
             </button>
@@ -338,6 +475,221 @@ function ZoomableImage({ src, alt }) {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+// ---------------------- PHOTO CAROUSEL COMPONENT ----------------------
+function PhotoCarousel({ photos }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const nextPhoto = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % photos.length);
+  }, [photos.length]);
+
+  const prevPhoto = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  }, [photos.length]);
+
+  const goToPhoto = useCallback((index) => {
+    setCurrentIndex(index);
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(nextPhoto, 5000);
+    return () => clearInterval(interval);
+  }, [nextPhoto, paused]);
+
+  return (
+    <div className="relative">
+      <div className="relative overflow-hidden rounded-lg bg-white/60 p-2 sm:p-4">
+        <motion.div
+          className="flex"
+          animate={{ x: -currentIndex * 100 + "%" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+          {photos.map((photo, i) => (
+            <div key={photo.id} className="w-full flex-shrink-0">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex-shrink-0">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="cursor-pointer rounded shadow hover:scale-105 transition-transform w-full max-w-xs sm:max-w-sm"
+                    onClick={() => { setOpenIndex(i); setPaused(true); }}
+                    loading="lazy"
+                  />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h3 className="font-semibold text-sm sm:text-base">{photo.title}</h3>
+                  <p className="text-xs sm:text-sm opacity-70 mt-1">{photo.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        <button
+          onClick={prevPhoto}
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-1 hover:bg-black/70 transition-colors touch-manipulation"
+        >
+          <ChevronLeft size={16} className="sm:w-5 sm:h-5" />
+        </button>
+        <button
+          onClick={nextPhoto}
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-1 hover:bg-black/70 transition-colors touch-manipulation"
+        >
+          <ChevronRight size={16} className="sm:w-5 sm:h-5" />
+        </button>
+      </div>
+
+      <div className="flex justify-center gap-2 mt-3">
+        {photos.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToPhoto(index)}
+            className={classNames(
+              "w-2 h-2 rounded-full transition-colors touch-manipulation",
+              index === currentIndex ? "bg-white" : "bg-white/50"
+            )}
+          />
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {openIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 p-4"
+            onClick={() => { setOpenIndex(null); setPaused(false); }}
+          >
+            <motion.img
+              key={openIndex}
+              src={photos[openIndex].src}
+              alt={photos[openIndex].alt}
+              className="max-h-[85vh] max-w-[95vw] rounded shadow-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white bg-black/50 rounded-full p-1 hover:bg-black/70 touch-manipulation"
+              onClick={() => { setOpenIndex(null); setPaused(false); }}
+            >
+              <X size={18} className="sm:w-5 sm:h-5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+
+// ---------------------- PORTFOLIO CONTENT COMPONENT ----------------------
+function PortfolioContent() {
+  const [activeSection, setActiveSection] = useState("photo");
+
+  return (
+    <div className="space-y-4">
+      {/* Section Tabs */}
+      <div className="flex gap-2 border-b border-gray-300">
+        <button
+          onClick={() => setActiveSection("photo")}
+          className={classNames(
+            "px-3 py-2 text-xs sm:text-sm font-medium transition-colors touch-manipulation",
+            activeSection === "photo" 
+              ? "text-black border-b-2 border-black" 
+              : "text-gray-600 hover:text-black"
+          )}
+        >
+          📸 Photography
+        </button>
+        <button
+          onClick={() => setActiveSection("marketing")}
+          className={classNames(
+            "px-3 py-2 text-xs sm:text-sm font-medium transition-colors touch-manipulation",
+            activeSection === "marketing" 
+              ? "text-black border-b-2 border-black" 
+              : "text-gray-600 hover:text-black"
+          )}
+        >
+          📱 Digital Marketing
+        </button>
+      </div>
+
+      {/* Content */}
+      <AnimatePresence mode="wait">
+        {activeSection === "photo" && (
+          <motion.div
+            key="photo"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="space-y-3">
+              <h3 className="text-sm sm:text-base font-semibold text-black">Photography Portfolio</h3>
+              <p className="text-xs sm:text-sm text-gray-700">
+                A collection of my photography work including portraits, events, and creative compositions.
+              </p>
+              <PhotoCarousel photos={PHOTO_PORTFOLIO} />
+            </div>
+          </motion.div>
+        )}
+
+        {activeSection === "marketing" && (
+          <motion.div
+            key="marketing"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="space-y-3">
+              <h3 className="text-sm sm:text-base font-semibold text-black">Digital Marketing Portfolio</h3>
+              <p className="text-xs sm:text-sm text-gray-700">
+                Social media content, magazines, and design work that drove engagement and results.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {MARKETING_PORTFOLIO.map((item) => (
+                  <div key={item.id} className="rounded-lg bg-white/60 p-3 shadow">
+                    <div className="flex flex-col sm:flex-row items-start gap-3">
+                      <div className="flex-shrink-0">
+                        <ZoomableImage
+                          src={item.src}
+                          alt={item.alt}
+                          link={item.link}
+                          imgClassName="w-[150px] h-[190px] sm:w-[190px] sm:h-[238px] object-cover object-center"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-sm sm:text-base break-words">{item.title}</h4>
+                        <p className="text-xs sm:text-sm opacity-70 mt-1 break-words whitespace-normal">{item.description}</p>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {item.link && (
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-[10px] sm:text-xs underline inline-flex items-center gap-1"
+                            >
+                              View post <ExternalLink size={12} />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -449,14 +801,7 @@ const WindowContent = memo(function WindowContent({ id }) {
           ))}
         </div>
       );
-    case "resume":
-      return (
-        <div className="text-xs sm:text-sm">
-          <a className="mt-2 inline-flex items-center gap-2 underline" href="/public/resume.docx.pdf" target="_blank" rel="noreferrer">
-            Open Resume <ExternalLink size={14} className="sm:w-4 sm:h-4" />
-          </a>
-        </div>
-      );
+    
     case "contact":
       return (
         <div className="text-xs sm:text-sm space-y-2">
@@ -466,6 +811,8 @@ const WindowContent = memo(function WindowContent({ id }) {
           <div className="flex items-center gap-2"><Linkedin size={14} className="sm:w-4 sm:h-4"/> <a className="underline" href={CONTACT.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></div>
         </div>
       );
+    case "portfolios":
+      return <PortfolioContent />;
     default:
       return <div>Coming soon…</div>;
   }
@@ -494,10 +841,8 @@ function XPWindow({ id, title, Icon, content, z, onFocus, onClose, onMinimize, d
   const [pos, setPos] = useState(defaultPos || { x: 200, y: 120 });
   const [drag, setDrag] = useState(null);
 
-  // Bring to front when clicking anywhere in window
   const handleFocus = () => onFocus?.();
 
-  // Drag handling on title bar
   const onMouseDown = (e) => {
     if (!(e.target).closest) return;
     const isTitlebar = (e.target).closest(".xp-titlebar");
