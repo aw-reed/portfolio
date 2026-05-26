@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mobile optimizations */
+/* Base + mobile optimizations */
 @layer base {
   * {
     -webkit-tap-highlight-color: transparent;
@@ -12,24 +12,34 @@
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+    min-height: 100dvh;
   }
-  
+
   body {
     touch-action: manipulation;
     overscroll-behavior: none;
+    cursor: default;
+    min-height: 100%;
+    min-height: 100dvh;
+    background: #020617;
+  }
+
+  #root {
+    min-height: 100dvh;
   }
 }
 
-/* Custom scrollbar for mobile */
+/* Subtle modern scrollbar */
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-color: rgba(100, 116, 139, 0.7) rgba(2, 6, 23, 0.1);
   }
   
   .scrollbar-thin::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 10px;
+    height: 10px;
   }
   
   .scrollbar-thin::-webkit-scrollbar-track {
@@ -37,11 +47,150 @@
   }
   
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
+    background: rgba(148, 163, 184, 0.55);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
   
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background: rgba(148, 163, 184, 0.75);
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  /* Moved from App.jsx — complex arbitrary values can hang Tailwind's scanner */
+  .image-lightbox-shell {
+    @apply relative flex max-h-[85dvh] max-w-[36rem] w-full flex-col items-center justify-center;
+  }
+
+  .image-lightbox-img {
+    @apply block max-h-[85dvh] max-w-full w-auto h-auto object-contain rounded-lg shadow-lg;
+  }
+
+  .liquid-glass-light {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      0 20px 60px rgba(0, 0, 0, 0.18);
+  }
+
+  .liquid-glass-dark {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 24px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .glass-panel-shadow {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 16px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-panel-shadow-md {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .app-card-shadow {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      0 18px 50px rgba(0, 0, 0, 0.14);
+  }
+
+  .ios-icon-shadow {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 14px 32px rgba(0, 0, 0, 0.28);
+  }
+
+  .ios-app-nav-shadow {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .dynamic-island-shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .device-frame-shadow-outer {
+    box-shadow:
+      0 50px 120px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+
+  .device-frame-shadow-body {
+    box-shadow: 0 60px 140px rgba(0, 0, 0, 0.55);
+  }
+
+  .device-screen-inset {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  .ios-app-overlay-light {
+    background-image:
+      radial-gradient(circle at 85% 20%, rgba(96, 165, 250, 0.22), transparent 35%),
+      radial-gradient(circle at 15% 75%, rgba(34, 197, 94, 0.16), transparent 35%);
+  }
+
+  .ios-app-overlay-dark {
+    background-image:
+      radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.24), transparent 35%),
+      radial-gradient(circle at 15% 75%, rgba(14, 165, 233, 0.16), transparent 35%);
+  }
+
+  .ios-wallpaper-light-main {
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -10%, rgba(147, 197, 253, 0.55), transparent 50%),
+      radial-gradient(circle at 85% 25%, rgba(251, 207, 232, 0.45), transparent 45%),
+      radial-gradient(circle at 10% 70%, rgba(167, 243, 208, 0.4), transparent 48%),
+      linear-gradient(180deg, #f1f5f9, #e2e8f0);
+  }
+
+  .ios-wallpaper-light-dots {
+    background-image: radial-gradient(rgba(15, 23, 42, 0.22) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .ios-wallpaper-light-sheen {
+    background-image: linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      transparent 42%,
+      transparent 58%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+  }
+
+  .ios-wallpaper-dark-main {
+    background-image:
+      radial-gradient(ellipse 120% 90% at 50% -15%, rgba(99, 102, 241, 0.35), transparent 55%),
+      radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.22), transparent 45%),
+      radial-gradient(circle at 15% 80%, rgba(34, 211, 238, 0.2), transparent 50%),
+      linear-gradient(180deg, #070b14, #020617);
+  }
+
+  .ios-wallpaper-dark-dots {
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  .ios-wallpaper-dark-sheen {
+    background-image: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  }
+
+  .page-bg-dots-light {
+    background-image: radial-gradient(rgba(15, 23, 42, 0.16) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .page-bg-dots-dark {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }
